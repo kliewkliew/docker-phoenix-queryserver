@@ -1,12 +1,8 @@
 FROM sequenceiq/hadoop-docker:2.7.0
 MAINTAINER Kevin Liew, kliewkliew
 
-ARG PHOENIX_VERSION=4.7.0
-ARG HBASE_MAJORMINOR=1.1
-ARG HBASE_PATCH=2
-ARG ZOOKEEPER_VERSION=3.4.8
-
 # Zookeeper
+ARG ZOOKEEPER_VERSION=3.4.8
 RUN curl -s https://archive.apache.org/dist/zookeeper/zookeeper-$ZOOKEEPER_VERSION/zookeeper-$ZOOKEEPER_VERSION.tar.gz | tar -xz -C /usr/local/
 RUN cd /usr/local && ln -s ./zookeeper-$ZOOKEEPER_VERSION zookeeper
 ENV ZOO_HOME /usr/local/zookeeper
@@ -15,12 +11,15 @@ RUN mv $ZOO_HOME/conf/zoo_sample.cfg $ZOO_HOME/conf/zoo.cfg
 RUN mkdir /tmp/zookeeper
 
 # HBase
+ARG HBASE_MAJORMINOR=1.1
+ARG HBASE_PATCH=2
 RUN curl -s https://archive.apache.org/dist/hbase/$HBASE_MAJORMINOR.$HBASE_PATCH/hbase-$HBASE_MAJORMINOR.$HBASE_PATCH-bin.tar.gz | tar -xz -C /usr/local/
 RUN cd /usr/local && ln -s ./hbase-$HBASE_MAJORMINOR.$HBASE_PATCH hbase
 ENV HBASE_HOME /usr/local/hbase
 ENV PATH $PATH:$HBASE_HOME/bin
 
 # Phoenix
+ARG PHOENIX_VERSION=4.7.0
 RUN curl -s https://archive.apache.org/dist/phoenix/phoenix-$PHOENIX_VERSION-HBase-$HBASE_MAJORMINOR/bin/phoenix-$PHOENIX_VERSION-HBase-$HBASE_MAJORMINOR-bin.tar.gz | tar -xz -C /usr/local/
 RUN cd /usr/local && ln -s ./phoenix-$PHOENIX_VERSION-HBase-$HBASE_MAJORMINOR-bin phoenix
 ENV PHOENIX_HOME /usr/local/phoenix
