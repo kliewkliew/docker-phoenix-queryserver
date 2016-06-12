@@ -23,10 +23,10 @@ if [[ $1 == "-bash" ]]; then
 fi
 
 if [[ $1 == "-sqlline" ]]; then
-  /usr/local/phoenix/hadoop2/bin/sqlline.py localhost
+  $PHOENIX_HOME/bin/sqlline-thin.py localhost
 fi
 
 if [[ $1 == "-qs" ]]; then
   echo "Starting queryserver"
-  /usr/local/phoenix/bin/queryserver.py
+  $PHOENIX_HOME/bin/queryserver.py
 fi

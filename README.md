@@ -22,4 +22,16 @@ The queryserver can be accessed via the host ip and the port 8765.
 ###sqlline
 `docker exec -it phoenix -sqlline`
 
+### Build
+Docker 1.10 or higher is required to build the image (to use `--build-arg`).
 
+To build a specific version
+```
+docker build -t kliew/phoenix-queryserver --build-arg PHOENIX_VERSION=4.7.0 .
+```
+
+#### Build Parameters
+* PHOENIX_VERSION
+* HBASE_MAJORMINOR
+* HBASE_PATCH
+* ZOOKEEPER_VERSION
