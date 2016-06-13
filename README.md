@@ -14,10 +14,10 @@ Apache Phoenix - 4.4.0+
 ###Launch
 The queryserver can be accessed via the host ip and the port 8765.
 ####Foreground
-`docker run -it --name phoenix -p 8765:8765 kliew/phoenix-queryserver`
+`docker run -it --name phoenix -p 8765:8765 kliew/phoenix-queryserver:SNAPSHOT`
 
 ####Background
-`docker run -d --name phoenix -p 8765:8765 kliew/phoenix-queryserver`
+`docker run -d --name phoenix -p 8765:8765 kliew/phoenix-queryserver:SNAPSHOT`
 
 ###sqlline
 `docker exec -it phoenix -sqlline`
@@ -27,11 +27,12 @@ Docker 1.10 or higher is required to build the image (to use `--build-arg`).
 
 To build a specific version
 ```
-docker build -t kliew/phoenix-queryserver --build-arg PHOENIX_VERSION=4.7.0 .
+docker build -t kliew/phoenix-queryserver:SNAPSHOT --build-arg PHOENIX_REPO=https://github.com/kliewkliew/phoenix --build-arg PHOENIX_REVISION=master .
 ```
 
 #### Build Parameters
-* PHOENIX_VERSION
+* PHOENIX_REPO
+* PHOENIX_REVISION
 * HBASE_MAJORMINOR
 * HBASE_PATCH
 * ZOOKEEPER_VERSION
